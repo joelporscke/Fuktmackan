@@ -125,6 +125,7 @@ Alternatively the Sd-value can be used: Sd = mu × d (in meters), which is the m
 - `saturationPressure`: Pa at each boundary (from temperature)
 - `relativeHumidity`: 0–1 at each boundary
 - `condensationRisk`: boolean
+- `vapourContent`: g/m³ at each boundary — calculated as `(vapourPressure / (461.5 * (temperature + 273.15))) * 1000`
 
 ### Saturation vapour pressure (Magnus approximation)
 ```js

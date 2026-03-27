@@ -16,3 +16,15 @@ export function saturationPressure(temperatureCelsius) {
 export function vapourPressure(temperatureCelsius, relativeHumidity) {
   return saturationPressure(temperatureCelsius) * relativeHumidity;
 }
+
+/**
+ * Vapour content (absolute humidity) from vapour pressure and temperature.
+ * Derived from the ideal gas law for water vapour: ρ = p / (Rv * T)
+ * where Rv = 461.5 J/(kg·K) is the specific gas constant for water vapour.
+ * @param {number} pressurePa - Vapour pressure in Pa
+ * @param {number} temperatureCelsius - Temperature in °C
+ * @returns {number} Vapour content in g/m³
+ */
+export function vapourContentFromPressure(pressurePa, temperatureCelsius) {
+  return (pressurePa / (461.5 * (temperatureCelsius + 273.15))) * 1000;
+}

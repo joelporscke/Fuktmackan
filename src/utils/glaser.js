@@ -15,7 +15,7 @@
  * looking up lambda from materials.json using the materialId stored in UI state.
  */
 
-import { saturationPressure, vapourPressure } from './physics.js';
+import { saturationPressure, vapourPressure, vapourContentFromPressure } from './physics.js';
 
 // ISO 6946 standard surface resistances for walls (m²K/W)
 const DEFAULT_SURFACE_RESISTANCES = { interior: 0.13, exterior: 0.04 };
@@ -103,6 +103,7 @@ export function calculateGlaser(layers, indoor, outdoor, surfaceResistances = DE
       saturationPressure: satPressure,
       relativeHumidity: vp / satPressure,
       condensationRisk: vp >= satPressure,
+      vapourContent: vapourContentFromPressure(vp, temperature),
     });
   }
 
@@ -127,6 +128,7 @@ export function calculateGlaser(layers, indoor, outdoor, surfaceResistances = DE
       saturationPressure: satPressure,
       relativeHumidity: vp / satPressure,
       condensationRisk: vp >= satPressure,
+      vapourContent: vapourContentFromPressure(vp, temperature),
     });
   }
 
