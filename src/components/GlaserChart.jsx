@@ -29,8 +29,9 @@ const CONDENSATION_THRESHOLD = 100;
 
 // All three charts use identical horizontal margins and Y-axis width so the
 // plot areas (the part that actually draws data) are left- and right-aligned.
-const MARGIN_TOP_MID  = { top: 10, right: 20, left: 8, bottom: 0 };
-const MARGIN_BOTTOM   = { top: 0,  right: 20, left: 8, bottom: 40 };
+const MARGIN_TOP    = { top: 0, right: 20, left: 8, bottom: 0 };
+const MARGIN_MID    = { top: 0, right: 20, left: 8, bottom: 0 };
+const MARGIN_BOTTOM = { top: 0,  right: 20, left: 8, bottom: 40 };
 const YAXIS_WIDTH     = 54;
 
 export default function GlaserChart({ glaserResult, layers }) {
@@ -81,7 +82,7 @@ export default function GlaserChart({ glaserResult, layers }) {
 
       {/* ── 1. Temperature ─────────────────────────────────────────────── */}
       <ResponsiveContainer width="100%" height={155}>
-        <ComposedChart data={chartData} margin={MARGIN_TOP_MID} syncId="glaser">
+        <ComposedChart data={chartData} margin={MARGIN_TOP}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           {bands.map((b, i) => (
             <ReferenceArea key={i} x1={b.x1} x2={b.x2}
@@ -89,7 +90,7 @@ export default function GlaserChart({ glaserResult, layers }) {
           ))}
           <XAxis
             dataKey="position" type="number" domain={xDomain}
-            height={1} tick={false} axisLine={false} tickLine={false}
+            height={0} tick={false} axisLine={false} tickLine={false}
           />
           <YAxis
             width={YAXIS_WIDTH}
@@ -110,7 +111,7 @@ export default function GlaserChart({ glaserResult, layers }) {
 
       {/* ── 2. Vapour content ──────────────────────────────────────────── */}
       <ResponsiveContainer width="100%" height={155}>
-        <ComposedChart data={chartData} margin={MARGIN_TOP_MID} syncId="glaser">
+        <ComposedChart data={chartData} margin={MARGIN_MID}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           {bands.map((b, i) => (
             <ReferenceArea key={i} x1={b.x1} x2={b.x2}
@@ -118,7 +119,7 @@ export default function GlaserChart({ glaserResult, layers }) {
           ))}
           <XAxis
             dataKey="position" type="number" domain={xDomain}
-            height={1} tick={false} axisLine={false} tickLine={false}
+            height={0} tick={false} axisLine={false} tickLine={false}
           />
           <YAxis
             width={YAXIS_WIDTH}
@@ -139,7 +140,7 @@ export default function GlaserChart({ glaserResult, layers }) {
 
       {/* ── 3. Relative humidity ───────────────────────────────────────── */}
       <ResponsiveContainer width="100%" height={210}>
-        <ComposedChart data={chartData} margin={MARGIN_BOTTOM} syncId="glaser">
+        <ComposedChart data={chartData} margin={MARGIN_BOTTOM}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           {bands.map((b, i) => (
             <ReferenceArea key={i} x1={b.x1} x2={b.x2}
