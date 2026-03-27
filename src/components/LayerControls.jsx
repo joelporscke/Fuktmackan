@@ -70,7 +70,7 @@ export default function LayerControls({ layer, onChange, onRemove, onMoveUp, onM
               step={0.5}
               value={thicknessMm}
               onChange={handleThicknessInput}
-              className="w-16 text-sm border rounded px-1 py-0.5 text-right"
+              className="w-20 text-sm border rounded px-1 py-0.5 text-right"
             />
             <span className="text-xs text-gray-500 w-6">mm</span>
           </div>
@@ -93,7 +93,7 @@ export default function LayerControls({ layer, onChange, onRemove, onMoveUp, onM
               step={0.5}
               value={layer.mu}
               onChange={handleMuInput}
-              className="w-16 text-sm border rounded px-1 py-0.5 text-right"
+              className="w-20 text-sm border rounded px-1 py-0.5 text-right"
             />
             <span className="text-xs text-gray-500 w-6">—</span>
           </div>

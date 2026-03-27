@@ -40,9 +40,6 @@ This is the most important thing the tool must communicate visually:
 - > 75% RF: Risk of mold growth on wood and most building materials
 - > 85% RF: Risk of mold growth in mineral wool
 - > 95% RF: Risk of rot in untreated wood
-- 100% RF: Condensation
-
----
 
 ## Tech stack
 
@@ -151,15 +148,21 @@ function saturationPressure(T) {
 - When a slider moves, the chart updates in real time
 
 ### Main chart (GlaserChart)
-- X-axis: position through wall in mm (inside = left, outside = right)
-- Y-axis left: Temperature (°C)
-- Y-axis right: Relative humidity (%)
-- Plotted lines:
-  - Temperature curve (blue)
+- Overall layout: side-by-side — controls panel on the left, charts on the right
+- Three separate stacked charts sharing the same X-axis:
+  - Top: Temperature (°C)
+  - Middle: Vapour content (g/m³)
+  - Bottom: Relative humidity (%)
+- All charts:
+  - X-axis: position through wall in mm (inside = left, outside = right)
+  - Background color bands showing each material layer
+- Temperature chart: one blue line
+- Vapour content chart: one green line
+- RF chart:
   - Actual RF curve (orange/red)
-  - Saturation RF = 100% line (dashed red) — condensation threshold
-- Background color bands showing each material layer
-- Highlight / warning marker where RF ≥ 100% (condensation point)
+  - Dashed red line at 100% RF — condensation threshold
+  - Dashed amber line at 75% RF — mold risk threshold
+  - Warning markers where RF ≥ 75%
 
 ### Results panel
 - Table showing per-layer: material name, thickness, R-value, Z-value (vapour resistance)

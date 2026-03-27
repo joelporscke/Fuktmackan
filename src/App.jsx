@@ -30,6 +30,14 @@ function makeDefaultLayers() {
   ];
 }
 
+function SectionHeading({ children }) {
+  return (
+    <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+      {children}
+    </h2>
+  );
+}
+
 export default function App() {
   const [indoor,  setIndoor]  = useState({ temperature: 20,  relativeHumidity: 0.50 });
   const [outdoor, setOutdoor] = useState({ temperature: -10, relativeHumidity: 0.85 });
@@ -82,48 +90,53 @@ export default function App() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
-      <header>
-        <h1 className="text-2xl font-bold text-gray-900">Fuktmackan</h1>
-        <p className="text-sm text-gray-500 mt-1">Stationary moisture analysis — Glaser method</p>
+    <div className="h-screen flex flex-col overflow-hidden bg-gray-50">
+
+      {/* Top header bar */}
+      <header className="shrink-0 px-6 py-3 bg-white border-b border-gray-200 flex items-baseline gap-3">
+        <h1 className="text-lg font-bold text-gray-900">Fuktmackan</h1>
+        <p className="text-sm text-gray-400">Stationary moisture analysis — Glaser method</p>
       </header>
 
-      <section>
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Climate conditions
-        </h2>
-        <BoundaryConditions
-          indoor={indoor}
-          outdoor={outdoor}
-          onIndoorChange={handleIndoorChange}
-          onOutdoorChange={handleOutdoorChange}
-        />
-      </section>
+      {/* Two-column body — each column scrolls independently */}
+      <div className="flex flex-1 min-h-0 gap-0">
 
-      <section>
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Wall construction — inside → outside
-        </h2>
-        <WallBuilder
-          layers={layers}
-          onLayersChange={setLayers}
-          materials={materials}
-        />
-      </section>
+        {/* Left: controls */}
+        <div className="w-[520px] shrink-0 flex flex-col gap-6 overflow-y-auto p-6 border-r border-gray-200 bg-white">
+          <section>
+            <SectionHeading>Climate conditions</SectionHeading>
+            <BoundaryConditions
+              indoor={indoor}
+              outdoor={outdoor}
+              onIndoorChange={handleIndoorChange}
+              onOutdoorChange={handleOutdoorChange}
+            />
+          </section>
 
-      <section>
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Moisture distribution
-        </h2>
-        <GlaserChart glaserResult={glaserResult} layers={layers} />
-      </section>
+          <section>
+            <SectionHeading>Wall construction — inside → outside</SectionHeading>
+            <WallBuilder
+              layers={layers}
+              onLayersChange={setLayers}
+              materials={materials}
+            />
+          </section>
+        </div>
 
-      <section>
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Results
-        </h2>
-        <ResultsPanel glaserResult={glaserResult} layers={layers} />
-      </section>
+        {/* Right: chart + results */}
+        <div className="flex-1 min-w-0 flex flex-col gap-6 overflow-y-auto p-6">
+          <section>
+            <SectionHeading>Moisture distribution</SectionHeading>
+            <GlaserChart glaserResult={glaserResult} layers={layers} />
+          </section>
+
+          <section>
+            <SectionHeading>Results</SectionHeading>
+            <ResultsPanel glaserResult={glaserResult} layers={layers} />
+          </section>
+        </div>
+
+      </div>
     </div>
   );
 }
